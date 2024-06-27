@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 import time
+import pandas as pd
 
 # Path to ChromeDriver
 driver_path = '/usr/local/bin/chromedriver'  # Ensure chromedriver is installed and the path is correct
@@ -40,29 +41,25 @@ time.sleep(10)  # Adjust based on your network speed and website response time
 # Now navigate to the secured page
 driver.get('https://www.feed-alliance.fr/index.php?option=com_faweb&innerview=terme&innerlayout=main#')
 
-# navigate to livre dachats from achats dropdown
-#relative XPATH //a[@data-options="menu:'#menu_achats'"]//span[@class='m-btn-downarrow']
-achats_link = driver.find_element(By.XPATH, "*//*[@class='m-btn-downarrow']")
+# navigate to livre d'achats from achats dropdown
+achats_link = driver.find_element(By.LINK_TEXT, "Achats")
 achats_link.click()
 time.sleep(5)
-#relative XPATH //div[@onclick="openLayout('achats', 'couvertures_main', 'facontent')"]//div[@class='menu-text']//a[@href='#']
-action = "openLayout('achats', 'couvertures_main', 'facontent')"
-livres_link = driver.find_element(By.XPATH, "*//div[@onclick=" + action + "]//div[@class='menu-text']//a[@href='#']")
+
+#navigate to livre d'achats
+livres_link = driver.find_element(By.LINK_TEXT, "Livres d'achats")
 livres_link.click()
 time.sleep(5)
 
 #navigate to usine
-#relative XPATH //span[normalize-space()='AXEREAL ELEVAGE USINES']
 usine_button = driver.find_element(By.XPATH, "*//span[normalize-space()='AXEREAL ELEVAGE USINES']")
 usine_button.click()
 time.sleep(5)
 
 #navigate to synthese
-#relative XPATH //span[normalize-space()='synthèse']
 synthese_button = driver.find_element(By.XPATH, "*//span[normalize-space()='synthèse']")
-
-# Give the next page some time to load if necessary
-time.sleep(10)
+synthese_button.click()
+time.sleep(5)
 
 # Extract the page content
 secured_page_content = driver.page_source
@@ -72,37 +69,46 @@ from bs4 import BeautifulSoup
 secured_page_soup = BeautifulSoup(secured_page_content, 'html.parser')
 secured_page_soup.prettify()
 
-'''
-# Find all elements with the specified classes
-elements_borduredroit_bas = secured_page_soup.find_all(class_='borduredroit_bas')
-elements_borduredroit_bas_centrer = secured_page_soup.find_all(class_='borduredroit_bas_centrer')
-
-# Combine the results if you need both in one list
-all_elements = elements_borduredroit_bas + elements_borduredroit_bas_centrer
-
-# Print the content of each element found
-for element in all_elements:
-    print(element)
-
-
 # Do your scraping here
 #print(secured_page_soup.prettify())
 
-# Find all elements with the specified classes
-#secured_page_soup.find_all(class_="borduredroit_bas")
-#secured_page_soup.find_all("td", "borduredroit_bas")
-secured_page_soup.find_all("a")
+# Initialize an empty list to hold the data
+data = []
 
-elements_borduredroit_bas_centrer = secured_page_soup.find_all(class_="borduredroite_bas centrer ")
+# Find all element headers
+headers = secured_page_soup.find_all('h1')
+#num_elements = len(headers)
 
-# Combine the results if you need both in one list
-all_elements = elements_borduredroit_bas + elements_borduredroit_bas_centrer
+# Iterate over each header
+for header in headers:
+    header_text = header.get_text()  # Get the text of the current header
+    
+    # Find the next 'tr' elements after the header
+    header_row = header.find_next('tr', class_='header_fa')
+    price_row = header_row.find_next('tr', class_='bold prix_prev')
 
-# Print the content of each element found
-for element in all_elements:
-    print(element)
+    # Extract dates from the header row
+    dates = header_row.find_all('td', class_='borduredroite_bas centrer')
+    date_texts = [date.get_text() for date in dates]
+    
+    # Extract prices from the price row
+    prices = price_row.find_all('td', class_='borduredroite_bas centrer')
+    price_texts = [price.get_text() for price in prices]
+
+    # Combine the data for the current header
+    for date, price in zip(date_texts, price_texts):
+        data.append({
+            'Header': header_text,
+            'Date': date,
+            'Price': price
+        })
+
+# Create a DataFrame from the data
+df = pd.DataFrame(data)
+
+# Print the DataFrame
+print(df)
 
 # Close the browser
-#driver.quit()
-'''
+driver.quit()
 
