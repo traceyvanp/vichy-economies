@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 import time
 import pandas as pd
+from datetime import datetime
 
 # Path to ChromeDriver
 driver_path = '/usr/local/bin/chromedriver'  # Ensure chromedriver is installed and the path is correct
@@ -19,6 +20,7 @@ driver = webdriver.Chrome(service=service, options=chrome_options)
 
 # Open the login page
 driver.get('https://www.feed-alliance.fr/index.php?option=com_faweb&innerview=activation')
+time.sleep(10) 
 
 # Find the required elements
 username_field = driver.find_element(By.XPATH, "*//*[@id='usr_mail']")
@@ -93,7 +95,9 @@ for header in headers:
     
     # Extract prices from the price row
     prices = price_row.find_all('td', class_='borduredroite_bas centrer')
-    price_texts = [price.get_text() for price in prices]
+    est_prices = price_row.find_all('td', class_='borduredroite_bas centrer prix_estimes')
+    combined_prices = prices + est_prices
+    price_texts = [price.get_text() for price in combined_prices]
 
     # Combine the data for the current header
     for date, price in zip(date_texts, price_texts):
@@ -108,6 +112,11 @@ df = pd.DataFrame(data)
 
 # Print the DataFrame
 print(df)
+
+#Export DataFrame to CSV
+today = datetime.today().strftime('%Y-%m-%d')
+filename = f'axereal_data_{today}.csv'
+df.to_csv(filename, index=False)
 
 # Close the browser
 driver.quit()
