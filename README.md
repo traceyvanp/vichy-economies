@@ -5,7 +5,7 @@ This repository webscrapes the current and forecasted prices on sourced raw mate
 1.) Set up the Google Chrome driver and other installs.
 2.) Run main.py (python main.py) to run code and get CSV
 
-# Install Google Chrome
+## Install Google Chrome
 
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt update
