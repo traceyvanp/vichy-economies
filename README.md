@@ -14,7 +14,7 @@ This repository webscrapes the current and forecasted prices on sourced raw mate
 <li>sudo apt update</li>
 <li>apt list --upgradable</li>
 <li>sudo apt install -y ./google-chrome-stable_current_amd64.deb</li>
-<li></li>rm google-chrome-stable_current_amd64.deb</li>
+<li>rm google-chrome-stable_current_amd64.deb</li>
 </ls>
 
 ## Install the ChromeDriver version that matches your installed Chrome version
