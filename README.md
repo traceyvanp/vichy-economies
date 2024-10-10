@@ -1,4 +1,4 @@
-# axereal
+# Tellus (former Axereal)
 
 This repository webscrapes the current and forecasted prices on sourced raw materials and exports to a dataframe.
 
@@ -13,7 +13,7 @@ apt list --upgradable
 sudo apt install -y ./google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
 
-# Install the ChromeDriver version that matches your installed Chrome version
+## Install the ChromeDriver version that matches your installed Chrome version
 
 wget https://storage.googleapis.com/chrome-for-testing-public/128.0.6613.137/linux64/chromedriver-linux64.zip
 
@@ -21,5 +21,5 @@ unzip chromedriver-linux64.zip
 sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
 rm chromedriver-linux64.zip
 
-# install selenium
+## install selenium
 pip install selenium
