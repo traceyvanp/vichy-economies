@@ -9,19 +9,22 @@ This repository webscrapes the current and forecasted prices on sourced raw mate
 
 ## Install Google Chrome
 
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt update
-apt list --upgradable
-sudo apt install -y ./google-chrome-stable_current_amd64.deb
-rm google-chrome-stable_current_amd64.deb
+<ls>
+<li>wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb</li>
+<li>sudo apt update</li>
+<li>apt list --upgradable</li>
+<li>sudo apt install -y ./google-chrome-stable_current_amd64.deb</li>
+<li></li>rm google-chrome-stable_current_amd64.deb</li>
+</ls>
 
 ## Install the ChromeDriver version that matches your installed Chrome version
 
-wget https://storage.googleapis.com/chrome-for-testing-public/128.0.6613.137/linux64/chromedriver-linux64.zip
-
-unzip chromedriver-linux64.zip
-sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
-rm chromedriver-linux64.zip
+<ls>
+<li>wget https://storage.googleapis.com/chrome-for-testing-public/128.0.6613.137/linux64/chromedriver-linux64.zip</li>
+<li>unzip chromedriver-linux64.zip</li>
+<li>sudo mv chromedriver-linux64/chromedriver /usr/local/bin/</li>
+<li>rm chromedriver-linux64.zip</li>
+</ls>
 
 ## install selenium
 pip install selenium
