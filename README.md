@@ -3,8 +3,8 @@
 This repository webscrapes the current and forecasted prices on sourced raw materials and exports to a dataframe.
 
 <ls>
-1.) Set up the Google Chrome driver and other installs.
-2.) Run main.py (python main.py) to run code and get CSV
+<li>1.) Set up the Google Chrome driver and other installs.</li>
+<li>2.) Run main.py (python main.py) to run code and get CSV.</li>
 </ls>
 
 ## Install Google Chrome
