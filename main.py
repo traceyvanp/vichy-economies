@@ -29,8 +29,8 @@ password_field = driver.find_element(By.XPATH, "*//*[@id='passwd']")
 connection_button = driver.find_element(By.XPATH, "*//*[@id='btn_login']")
 
 #set the key values
-username_field.send_keys('thomas.van-puyvelde@axereal-elevage.com')
-password_field.send_keys('FeedAx2024')
+username_field.send_keys('thomas.van-puyvelde@tellus.com')
+password_field.send_keys('l2qRnHoS')
 
 # Submit the form
 connection_button.send_keys(Keys.ENTER)
