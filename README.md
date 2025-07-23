@@ -1,6 +1,6 @@
-# Tellus (former Axereal)
+# Vichy-economies
 
-This repository webscrapes the current and forecasted prices on sourced raw materials and exports to a dataframe.
+This repository webscrapes business data to a dataframe.
 
 <ls>
 <li>1.) Set up the Google Chrome driver and other installs.</li>
