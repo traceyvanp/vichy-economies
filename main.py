@@ -23,14 +23,6 @@ driver = webdriver.Chrome(service=service, options=chrome_options)
 driver.get('https://www.feed-alliance.fr/index.php?option=com_faweb&innerview=activation')
 time.sleep(10) 
 
-# Find the required elements
-username_field = driver.find_element(By.XPATH, "*//*[@id='usr_mail']")
-password_field = driver.find_element(By.XPATH, "*//*[@id='passwd']")
-connection_button = driver.find_element(By.XPATH, "*//*[@id='btn_login']")
-
-#set the key values
-username_field.send_keys('thomas.van-puyvelde@tellus.com')
-password_field.send_keys('l2qRnHoS')
 
 # Submit the form
 connection_button.send_keys(Keys.ENTER)
